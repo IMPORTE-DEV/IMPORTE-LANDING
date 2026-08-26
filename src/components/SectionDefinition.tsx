@@ -20,7 +20,7 @@ const Box = forwardRef<HTMLDivElement, { label: string }>(function Box(
   return (
     <div
       ref={ref}
-      className="shrink-0 rounded-md border border-main-black/15 bg-main-black/[0.04] px-4 py-2.5 font-mono text-sm text-main-black sm:text-base"
+      className="relative z-10 shrink-0 rounded-md border border-main-black/15 bg-main-ivory px-4 py-2.5 font-mono text-sm text-main-black sm:text-base"
     >
       {label}
     </div>
@@ -152,7 +152,7 @@ function ConnectionDiagram() {
 
   return (
     <div ref={scrollRef} className="relative w-full">
-      <div className="mb-8 flex justify-between px-1 font-mono text-xs tracking-[0.2em] text-main-black/50 uppercase sm:text-sm">
+      <div className="mb-8 flex justify-between px-1 font-mono text-xs tracking-[0.2em] text-main-black/65 uppercase sm:text-sm">
         <span>Backend</span>
         <span>Frontend</span>
       </div>
@@ -224,7 +224,11 @@ const paragraphs: { text: string; emphasis?: boolean }[] = [
 
 export function SectionDefinition() {
   return (
-    <section className="bg-main-ivory px-6 py-28 text-main-black sm:px-10 lg:px-24">
+    <section
+      id="connection"
+      data-header-theme="light"
+      className="scroll-mt-20 bg-main-ivory px-6 py-28 text-main-black sm:px-10 lg:px-24"
+    >
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-16 lg:grid-cols-[2fr_3fr] lg:gap-10">
         <div className="max-w-[640px]">
           {paragraphs.map((p, i) => (
