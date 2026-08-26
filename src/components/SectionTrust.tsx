@@ -53,15 +53,16 @@ function ResolutionRow({
 const copy: { text: string; className: string }[] = [
   {
     text: '걱정하지 마세요.',
-    className: 'text-[22px] font-medium text-secondary-text sm:text-[24px]',
+    className:
+      'text-[30px] leading-[1.3] font-bold tracking-tight text-main-ivory sm:text-[34px]',
   },
   {
     text: '신뢰할 수 없는 자동화는\n반쪽짜리 자동화입니다.',
     className:
-      'mt-6 text-[24px] leading-[1.35] font-medium text-main-ivory sm:text-[28px]',
+      'mt-6 text-[20px] leading-[1.4] font-normal text-secondary-text sm:text-[22px]',
   },
   {
-    text: '코드에서 반쪽이란\n아무것도 아닌 것과 다르지 않습니다.',
+    text: '코드에서 반쪽이란\n아무것도 아닙니다.',
     className:
       'mt-6 text-[30px] leading-[1.3] font-bold tracking-tight text-main-ivory sm:text-[34px]',
   },
@@ -69,7 +70,11 @@ const copy: { text: string; className: string }[] = [
 
 export function SectionTrust() {
   return (
-    <section className="bg-main-black px-6 py-28 text-main-ivory sm:px-10 lg:px-24">
+    <section
+      id="trust"
+      data-header-theme="dark"
+      className="scroll-mt-20 bg-main-black px-6 py-28 text-main-ivory sm:px-10 lg:px-24"
+    >
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-16 lg:grid-cols-[2fr_3fr] lg:gap-10">
         <div className="max-w-[640px]">
           {copy.map((c, i) => (
@@ -86,30 +91,15 @@ export function SectionTrust() {
           ))}
 
           <motion.p
-            className="mt-10 text-[19px] leading-[1.6] text-secondary-text sm:text-[21px]"
+            className="mt-10 text-[26px] leading-[1.35] font-bold tracking-tight text-main-ivory sm:text-[30px]"
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.6 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            확실한 연결.
+            <span className="text-brand-orange">IMPORTE</span>는 추측 없이,
             <br />
-            확실한 영향 파악.
-          </motion.p>
-
-          <motion.p
-            className="mt-6 text-[26px] leading-[1.35] font-bold tracking-tight text-main-ivory sm:text-[30px]"
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            IMPORTE는{' '}
-            <span className="text-brand-orange">
-              추측 없이,
-              <br />
-              확실한 연결을 구성합니다.
-            </span>
+            확실한 연결을 구성합니다.
           </motion.p>
 
           <motion.p
@@ -121,15 +111,13 @@ export function SectionTrust() {
           >
             확실한 것은 처리하고,
             <br />
-            확실하지 않은 것은
-            <br />
             어설프게 고치지 않습니다.
             <br />
             멈추고, 확인합니다.
           </motion.p>
 
           <motion.p
-            className="mt-8 text-[19px] leading-[1.6] font-medium text-main-ivory sm:text-[21px]"
+            className="mt-8 text-[19px] leading-[1.6] font-normal text-secondary-text sm:text-[21px]"
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.6 }}
@@ -137,7 +125,7 @@ export function SectionTrust() {
           >
             모르는 것을 모른다고 말하는 것.
             <br />
-            AI 시대의 새로운 덕목입니다.
+            AI 시대까지도 이어지는 덕목입니다.
           </motion.p>
         </div>
 
