@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { OMark } from './OMark'
+import { trackCtaClick } from '../lib/analytics'
 
 type Theme = 'dark' | 'light'
 
@@ -126,7 +127,10 @@ export function Header({ visible }: { visible: boolean }) {
 
       <motion.button
         type="button"
-        onClick={() => scrollToId('closing-cta')}
+        onClick={() => {
+          trackCtaClick('header')
+          scrollToId('closing-cta')
+        }}
         className="ml-auto text-[13px] font-semibold sm:text-[14px]"
         animate={{ color: fg }}
         transition={{ duration: 0.3 }}
