@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { BrushRing } from './BrushRing'
 
@@ -6,17 +6,24 @@ type IntroProps = {
   onComplete: () => void
 }
 
+type Flip = { x: number; y: number; scale: number }
+
 /**
  * Logo formation: IM is separated from PORTE. The O ignites first —
  * its negative space deepens to black — then gravity pulls IM into
  * place to complete IMPORTE. A single light sweep marks the join.
+ * The finished wordmark then flies up into the header's own logo spot
+ * (measured via FLIP), handing off to the real header underneath.
  */
 export function Intro({ onComplete }: IntroProps) {
   const reduceMotion = useReducedMotion()
   const [ignited, setIgnited] = useState(false)
   const [joined, setJoined] = useState(false)
   const [sweep, setSweep] = useState(false)
+  const [flying, setFlying] = useState(false)
   const [visible, setVisible] = useState(true)
+  const [flip, setFlip] = useState<Flip>({ x: 0, y: 0, scale: 1 })
+  const wordmarkRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (reduceMotion) {
@@ -31,8 +38,23 @@ export function Intro({ onComplete }: IntroProps) {
       setTimeout(() => setIgnited(true), 380),
       setTimeout(() => setJoined(true), 620),
       setTimeout(() => setSweep(true), 1340),
-      setTimeout(() => setVisible(false), 2500),
-      setTimeout(() => onComplete(), 2900),
+      setTimeout(() => {
+        const source = wordmarkRef.current?.getBoundingClientRect()
+        const target = document
+          .querySelector('[data-header-logo]')
+          ?.getBoundingClientRect()
+        if (source && target && source.width > 0) {
+          const scale = target.width / source.width
+          const x =
+            target.left + target.width / 2 - (source.left + source.width / 2)
+          const y =
+            target.top + target.height / 2 - (source.top + source.height / 2)
+          setFlip({ x, y, scale })
+        }
+        setFlying(true)
+      }, 2000),
+      setTimeout(() => onComplete(), 2650),
+      setTimeout(() => setVisible(false), 2750),
     ]
     return () => timers.forEach(clearTimeout)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -54,13 +76,25 @@ export function Intro({ onComplete }: IntroProps) {
           transition={{ duration: 0.4, ease: 'easeOut' }}
         >
           <div className="relative flex items-center justify-center">
-            <div
+            <motion.div
+              ref={wordmarkRef}
               className="flex items-baseline font-display select-none"
               style={{
                 fontSize: 'clamp(40px, 8vw, 96px)',
                 fontWeight: 800,
                 letterSpacing: '-0.02em',
                 color: '#F2EEE5',
+              }}
+              animate={
+                flying
+                  ? { x: flip.x, y: flip.y, scale: flip.scale, opacity: [1, 1, 0] }
+                  : { x: 0, y: 0, scale: 1, opacity: 1 }
+              }
+              transition={{
+                x: { duration: 0.65, ease: [0.65, 0, 0.35, 1] },
+                y: { duration: 0.65, ease: [0.65, 0, 0.35, 1] },
+                scale: { duration: 0.65, ease: [0.65, 0, 0.35, 1] },
+                opacity: { duration: 0.65, times: [0, 0.8, 1] },
               }}
             >
               <motion.span
@@ -89,7 +123,7 @@ export function Intro({ onComplete }: IntroProps) {
                 </span>
                 <span>RTE</span>
               </span>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       )}

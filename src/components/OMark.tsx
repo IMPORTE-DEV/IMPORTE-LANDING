@@ -2,7 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { BrushRing } from './BrushRing'
 
 type OMarkProps = {
-  size?: number
+  size?: number | string
   ignited?: boolean
   pulse?: boolean
   sweep?: boolean
