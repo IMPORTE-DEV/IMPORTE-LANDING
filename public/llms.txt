@@ -1,0 +1,18 @@
+# IMPORTE
+
+> IMPORTE connects a product's Backend and Frontend automatically. When an API changes, IMPORTE finds what's affected, updates the dependent code it can be certain about, and reports exactly what changed — instead of asking a developer to redo work that's already been decided.
+
+IMPORTE is a pre-launch developer tool built for teams shipping Backend and Frontend together. When a backend contract changes (a field renamed, a type updated), IMPORTE traces every frontend consumer of that field, resolves what it can confirm with certainty, and leaves anything ambiguous untouched rather than guessing. The output is a reconciliation report — what changed, what was updated, what's unresolved, and whether typecheck/contract/tests passed — instead of a diff a human has to re-read line by line.
+
+## Product sections
+- Connection (https://www.importe.dev/#connection): how IMPORTE wires Router/Schema/Logic on the backend to Type/Client/Consumer on the frontend through a single point of connection.
+- Trust (https://www.importe.dev/#trust): why IMPORTE only acts on what it can confirm, and deliberately leaves unresolved cases untouched instead of guessing.
+- Report (https://www.importe.dev/#report): the reconciliation report IMPORTE produces after a change — affected, updated, unresolved, and verification status.
+- Positioning (https://www.importe.dev/#positioning): why IMPORTE exists — so developers can focus on experience and logic instead of repetitive wiring work.
+
+## Status
+IMPORTE has not publicly launched. There is no public GitHub App or self-serve signup yet. Interested users, partners, or press should contact the founder directly.
+
+## Contact
+- Email: kcleverp@gmail.com
+- LinkedIn: https://www.linkedin.com/in/kcleverp
