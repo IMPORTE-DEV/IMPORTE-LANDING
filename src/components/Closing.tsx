@@ -70,9 +70,33 @@ export function Closing() {
         </motion.span>
       </motion.a>
 
-      <p className="mt-24 text-xs text-secondary-text/60">
-        IMPORTE © 2026 · GitHub · Docs
-      </p>
+      <div className="mt-24 flex flex-col items-center gap-4 text-xs text-secondary-text/60">
+        <p>IMPORTE © 2026</p>
+
+        <div className="flex flex-col items-center gap-1.5">
+          <p className="font-mono text-[10px] tracking-[0.15em] text-secondary-text/40 uppercase">
+            Contact
+          </p>
+          <div className="grid grid-cols-[auto_auto] items-baseline gap-x-2 gap-y-1.5 text-left">
+            <span className="text-right text-secondary-text/40">LinkedIn</span>
+            <a
+              href="https://www.linkedin.com/in/kcleverp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-secondary-text/40 underline-offset-2 transition-colors hover:text-main-ivory hover:decoration-main-ivory"
+            >
+              www.linkedin.com/in/kcleverp
+            </a>
+            <span className="text-right text-secondary-text/40">Email</span>
+            <a
+              href="mailto:kcleverp@gmail.com"
+              className="underline decoration-secondary-text/40 underline-offset-2 transition-colors hover:text-main-ivory hover:decoration-main-ivory"
+            >
+              kcleverp@gmail.com
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }
