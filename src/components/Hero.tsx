@@ -4,15 +4,18 @@ const chain = ['Backend Changed', 'Schema', 'Type', 'Client', 'Consumer']
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden bg-main-black px-6 py-32 sm:px-10 lg:px-24">
+    <section
+      data-header-theme="dark"
+      className="relative flex min-h-screen items-center overflow-hidden bg-main-black px-6 py-32 sm:px-10 lg:px-24"
+    >
       {/* faint background chain, purely atmospheric */}
-      <div className="pointer-events-none absolute top-1/2 right-6 hidden -translate-y-1/2 flex-col items-end gap-3 text-right font-mono text-sm text-secondary-text sm:right-12 md:flex lg:right-20">
+      <div className="pointer-events-none absolute top-1/2 right-10 hidden -translate-y-1/2 flex-col items-end gap-3.5 text-right font-mono text-[17px] text-main-ivory sm:right-16 md:flex lg:right-28 lg:text-[19px]">
         {chain.map((label, i) => (
           <motion.div
             key={label}
-            className="flex flex-col items-end gap-3"
+            className="flex flex-col items-end gap-3.5"
             initial={{ opacity: 0 }}
-            animate={{ opacity: [0.08, 0.2, 0.08] }}
+            animate={{ opacity: [0.5, 0.78, 0.5] }}
             transition={{
               duration: 3.6,
               repeat: Infinity,
