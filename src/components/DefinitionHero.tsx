@@ -7,7 +7,7 @@ export function DefinitionHero() {
       data-header-theme="dark"
       className="relative flex min-h-screen items-center bg-main-black px-6 sm:px-10 lg:px-24"
     >
-      <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start gap-10 sm:flex-row sm:items-center sm:justify-center sm:gap-14">
+      <div className="mx-auto flex w-full max-w-[1320px] flex-col items-center gap-10 text-center sm:flex-row sm:items-center sm:justify-center sm:gap-14 sm:text-left">
         <motion.h1
           className="font-display leading-[1.2] font-extrabold tracking-tight text-main-ivory"
           style={{ fontSize: 'clamp(32px, 6vw, 76px)' }}
