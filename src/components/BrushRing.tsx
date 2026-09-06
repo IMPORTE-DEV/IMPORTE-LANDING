@@ -1,5 +1,5 @@
 import { useId } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
 /**
  * Faithful vector trace of the IMPORTE brand mark (dry-brush orange O).
@@ -17,6 +17,16 @@ const MUTED = '#8B857C'
 const LIT = '#E9652B'
 const FLASH = '#FFC08A'
 
+/** Tint / base / shade for each state, so the stroke carries a light source
+ *  instead of reading as flat fill. */
+const TONE = {
+  muted: { tint: '#9E9890', base: MUTED, shade: '#6E695F' },
+  lit: { tint: '#F09A70', base: LIT, shade: '#AE4318' },
+  /** One soft step above `lit` — the far end of the ambient breathe. */
+  glow: { tint: '#F4AE88', base: '#EE7238', shade: '#BE4D1E' },
+  flash: { tint: '#FFD9B5', base: FLASH, shade: '#E9873F' },
+} as const
+
 type BrushRingProps = {
   ignited: boolean
   sweep?: boolean
@@ -30,8 +40,22 @@ export function BrushRing({
   glow = false,
   className = '',
 }: BrushRingProps) {
-  const target = ignited ? LIT : MUTED
+  const reduceMotion = useReducedMotion()
+  const tone = ignited ? TONE.lit : TONE.muted
   const gradientId = useId()
+  const shadeId = useId()
+  const overId = useId()
+  const pathId = useId()
+  const breathes = ignited && !sweep && !reduceMotion
+
+  // The overlay carries the moving light: flash on sweep, otherwise a slow
+  // ambient breathe. Cross-fading it beats animating gradient stops, which
+  // Framer Motion applies but does not tween.
+  const over = sweep ? TONE.flash : TONE.glow
+  const overOpacity = sweep ? [0, 1, 0] : breathes ? [0, 0.7, 0] : 0
+  const overTransition = breathes
+    ? { duration: 4.2, repeat: Infinity, ease: 'easeInOut' as const }
+    : { duration: sweep ? 0.55 : 0.35, ease: 'easeOut' as const }
 
   return (
     <svg
@@ -45,6 +69,34 @@ export function BrushRing({
           <stop offset="65%" stopColor={LIT} stopOpacity="0.18" />
           <stop offset="100%" stopColor={LIT} stopOpacity="0" />
         </radialGradient>
+
+        <path
+          id={pathId}
+          d={BRUSH_PATH}
+          fillRule="evenodd"
+          clipRule="evenodd"
+        />
+
+        <linearGradient id={shadeId} x1="0" y1="0" x2="1" y2="1">
+          {(['tint', 'base', 'shade'] as const).map((stop, i) => (
+            <stop
+              key={stop}
+              offset={['0%', '32%', '100%'][i]}
+              stopColor={tone[stop]}
+              style={{ transition: 'stop-color 0.35s ease-out' }}
+            />
+          ))}
+        </linearGradient>
+
+        <linearGradient id={overId} x1="0" y1="0" x2="1" y2="1">
+          {(['tint', 'base', 'shade'] as const).map((stop, i) => (
+            <stop
+              key={stop}
+              offset={['0%', '32%', '100%'][i]}
+              stopColor={over[stop]}
+            />
+          ))}
+        </linearGradient>
       </defs>
 
       {glow && (
@@ -60,22 +112,20 @@ export function BrushRing({
         />
       )}
 
-      <circle cx={CX} cy={CY} r={128} fill="#000000" />
-
       <motion.g
         style={{ transformOrigin: `${CX}px ${CY}px` }}
         initial={false}
         animate={sweep ? { scale: [1, 1.07, 1] } : { scale: 1 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
-        <motion.path
-          d={BRUSH_PATH}
-          fillRule="evenodd"
-          clipRule="evenodd"
-          initial={false}
-          animate={{ fill: sweep ? [target, FLASH, target] : target }}
-          transition={{ duration: sweep ? 0.55 : 0.35, ease: 'easeOut' }}
-        />
+        <use href={`#${pathId}`} fill={`url(#${shadeId})`} />
+        <motion.g
+          initial={{ opacity: 0 }}
+          animate={{ opacity: overOpacity }}
+          transition={overTransition}
+        >
+          <use href={`#${pathId}`} fill={`url(#${overId})`} />
+        </motion.g>
       </motion.g>
     </svg>
   )
