@@ -22,8 +22,11 @@ const FLASH = '#FFC08A'
 const TONE = {
   muted: { tint: '#9E9890', base: MUTED, shade: '#6E695F' },
   lit: { tint: '#F09A70', base: LIT, shade: '#AE4318' },
-  /** One soft step above `lit` — the far end of the ambient breathe. */
+  /** Far end of the ambient breathe. Brightening only gains contrast against
+   *  a dark ground; on ivory the stroke has to deepen instead, or it drifts
+   *  toward the background and reads as fading. */
   glow: { tint: '#F4AE88', base: '#EE7238', shade: '#BE4D1E' },
+  deepen: { tint: LIT, base: '#D2531E', shade: '#93390F' },
   flash: { tint: '#FFD9B5', base: FLASH, shade: '#E9873F' },
 } as const
 
@@ -31,6 +34,8 @@ type BrushRingProps = {
   ignited: boolean
   sweep?: boolean
   glow?: boolean
+  /** Set on ivory surfaces so the breathe deepens instead of brightening. */
+  onLight?: boolean
   className?: string
 }
 
@@ -38,6 +43,7 @@ export function BrushRing({
   ignited,
   sweep = false,
   glow = false,
+  onLight = false,
   className = '',
 }: BrushRingProps) {
   const reduceMotion = useReducedMotion()
@@ -51,7 +57,7 @@ export function BrushRing({
   // The overlay carries the moving light: flash on sweep, otherwise a slow
   // ambient breathe. Cross-fading it beats animating gradient stops, which
   // Framer Motion applies but does not tween.
-  const over = sweep ? TONE.flash : TONE.glow
+  const over = sweep ? TONE.flash : onLight ? TONE.deepen : TONE.glow
   const overOpacity = sweep ? [0, 1, 0] : breathes ? [0, 0.7, 0] : 0
   const overTransition = breathes
     ? { duration: 4.2, repeat: Infinity, ease: 'easeInOut' as const }

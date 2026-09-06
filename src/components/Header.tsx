@@ -90,7 +90,7 @@ export function Header({ visible }: { visible: boolean }) {
         className="flex items-center gap-2.5"
         aria-label="맨 위로"
       >
-        <OMark size={22} ignited />
+        <OMark size={22} ignited onLight={!isDark} />
         <motion.span
           className="font-display text-[15px] font-extrabold tracking-wide"
           animate={{ color: fg }}

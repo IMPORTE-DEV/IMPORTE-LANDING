@@ -207,7 +207,7 @@ function ConnectionDiagram() {
               opacity: oOpacity,
             }}
           >
-            <OMark size={52} ignited pulse />
+            <OMark size={52} ignited pulse onLight />
           </motion.div>
         )}
       </div>

@@ -6,6 +6,8 @@ type OMarkProps = {
   ignited?: boolean
   pulse?: boolean
   sweep?: boolean
+  /** Set on ivory surfaces so the breathe deepens instead of brightening. */
+  onLight?: boolean
   className?: string
 }
 
@@ -18,6 +20,7 @@ export function OMark({
   ignited = true,
   pulse = false,
   sweep = false,
+  onLight = false,
   className = '',
 }: OMarkProps) {
   const reduceMotion = useReducedMotion()
@@ -31,7 +34,12 @@ export function OMark({
         pulse ? { duration: 3.2, repeat: Infinity, ease: 'easeInOut' } : undefined
       }
     >
-      <BrushRing ignited={ignited} sweep={sweep} className="h-full w-full" />
+      <BrushRing
+        ignited={ignited}
+        sweep={sweep}
+        onLight={onLight}
+        className="h-full w-full"
+      />
     </motion.div>
   )
 }
