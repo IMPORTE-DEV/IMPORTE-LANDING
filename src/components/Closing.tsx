@@ -1,24 +1,10 @@
 import { useState } from 'react'
-import { motion, useAnimationControls } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { OMark } from './OMark'
 import { trackCtaClick } from '../lib/analytics'
 
 export function Closing() {
   const [hover, setHover] = useState(false)
-  const contactControls = useAnimationControls()
-
-  const goToContact = () => {
-    trackCtaClick('closing')
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    contactControls.start({
-      backgroundColor: [
-        'rgba(233,101,43,0)',
-        'rgba(233,101,43,0.32)',
-        'rgba(233,101,43,0)',
-      ],
-      transition: { duration: 1.4, ease: 'easeInOut' },
-    })
-  }
 
   return (
     <section
@@ -53,13 +39,13 @@ export function Closing() {
         </p>
       </motion.div>
 
-      <motion.button
-        type="button"
+      <motion.a
+        href="https://app.importe.dev"
         id="closing-cta"
         className="group relative mt-16 inline-flex scroll-mt-24 items-center gap-3 rounded-full border border-main-ivory/20 px-9 py-4 text-[16px] font-semibold text-main-ivory transition-colors sm:text-[17px]"
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        onClick={goToContact}
+        onClick={() => trackCtaClick('closing')}
         initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.6 }}
@@ -74,14 +60,13 @@ export function Closing() {
         >
           →
         </motion.span>
-      </motion.button>
+      </motion.a>
 
       <div className="mt-24 flex flex-col items-center gap-4 text-xs text-secondary-text/60">
         <p>IMPORTE © 2026</p>
 
-        <motion.div
+        <div
           id="contact"
-          animate={contactControls}
           className="flex scroll-mt-24 flex-col items-center gap-1.5 rounded-lg px-4 py-2"
         >
           <p className="font-mono text-[10px] tracking-[0.15em] text-secondary-text/40 uppercase">
@@ -105,7 +90,7 @@ export function Closing() {
               kcleverp@gmail.com
             </a>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

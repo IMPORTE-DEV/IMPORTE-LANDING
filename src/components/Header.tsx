@@ -125,18 +125,15 @@ export function Header({ visible }: { visible: boolean }) {
         ))}
       </nav>
 
-      <motion.button
-        type="button"
-        onClick={() => {
-          trackCtaClick('header')
-          scrollToId('closing-cta')
-        }}
+      <motion.a
+        href="https://app.importe.dev"
+        onClick={() => trackCtaClick('header')}
         className="ml-auto text-[13px] font-semibold sm:text-[14px]"
         animate={{ color: fg }}
         transition={{ duration: 0.3 }}
       >
         Get Early Access →
-      </motion.button>
+      </motion.a>
     </motion.header>
   )
 }
