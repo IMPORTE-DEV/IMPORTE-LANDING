@@ -53,7 +53,7 @@ export function Closing() {
         animate={{ borderColor: hover ? '#E9652B' : 'rgba(242,238,229,0.2)' }}
       >
         <OMark size={16} ignited={hover} />
-        Get Early Access
+        GitHub로 시작하기
         <motion.span
           animate={{ x: hover ? 4 : 0, color: hover ? '#E9652B' : '#F2EEE5' }}
           transition={{ duration: 0.25 }}

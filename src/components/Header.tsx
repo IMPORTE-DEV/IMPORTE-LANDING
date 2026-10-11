@@ -132,7 +132,7 @@ export function Header({ visible }: { visible: boolean }) {
         animate={{ color: fg }}
         transition={{ duration: 0.3 }}
       >
-        Get Early Access →
+        GitHub로 시작하기 →
       </motion.a>
     </motion.header>
   )
