@@ -2,25 +2,24 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 const diffLines = [
-  { text: '- type UserCardProps = { userName: string }', sign: '-' },
-  { text: '+ type UserCardProps = { name: string }', sign: '+' },
-  { text: '  export function UserCard(props: UserCardProps) {', sign: ' ' },
-  { text: '-   return <span>{props.userName}</span>', sign: '-' },
-  { text: '+   return <span>{props.name}</span>', sign: '+' },
+  { text: '  // users.dto.ts', sign: ' ' },
+  { text: '  export class UserResponse {', sign: ' ' },
+  { text: '    id: string', sign: ' ' },
+  { text: '-   name: string', sign: '-' },
+  { text: '+   displayName: string', sign: '+' },
+  { text: '    avatarUrl: string', sign: ' ' },
   { text: '  }', sign: ' ' },
-  { text: '- ProfileHeader.tsx · user.userName → user.name', sign: '-' },
-  { text: '+ ProfileHeader.tsx · user.name confirmed', sign: '+' },
-  { text: '- SettingsProfile.tsx · user.userName → user.name', sign: '-' },
-  { text: '+ SettingsProfile.tsx · user.name confirmed', sign: '+' },
+  { text: '  // users.controller.ts', sign: ' ' },
+  { text: '  @Get(\':id\') getUser(@Param(\'id\') id: string)', sign: ' ' },
+  { text: '    return this.users.toResponse(user)', sign: ' ' },
 ]
 
-const stats: { label: string; value: string }[] = [
-  { label: 'Affected', value: '4' },
-  { label: 'Updated', value: '4' },
-  { label: 'Unresolved', value: '0' },
+const impacts: { location: string; confirmed: boolean }[] = [
+  { location: 'ProfileHeader.tsx:27', confirmed: true },
+  { location: 'UserCard.tsx:14', confirmed: true },
+  { location: 'SettingsProfile.tsx:42', confirmed: true },
+  { location: 'LegacyView.tsx', confirmed: false },
 ]
-
-const checks = ['Typecheck', 'Contract', 'Tests']
 
 const copy: { text: string; className: string }[] = [
   {
@@ -38,7 +37,7 @@ const copy: { text: string; className: string }[] = [
       'mt-6 text-[22px] leading-[1.4] font-semibold sm:text-[26px]',
   },
   {
-    text: 'IMPORTE는\n변경만 만들고 끝내지 않습니다.',
+    text: 'IMPORTE는\n경고만 던지고 끝내지 않습니다.',
     className:
       'mt-10 text-[24px] leading-[1.35] font-bold tracking-tight sm:text-[28px]',
   },
@@ -89,9 +88,9 @@ export function SectionReport() {
             <br />
             어디까지 영향을 받았는지.
             <br />
-            무엇을 처리했는지.
+            무엇이 확실하고,
             <br />
-            어떻게 검증했는지.
+            무엇을 확인해야 하는지.
           </motion.p>
 
           <motion.p
@@ -107,7 +106,7 @@ export function SectionReport() {
 
         <div className="flex items-center">
           <div ref={ref} className="relative w-full">
-            {/* receding diff, evidence of the work done */}
+            {/* receding diff, the provider change behind the report */}
             <motion.pre
               className="pointer-events-none absolute inset-x-0 top-6 mx-auto max-w-[520px] overflow-hidden font-mono text-[11px] leading-[1.9] text-main-black sm:text-[12px]"
               style={{ opacity: diffOpacity, y: diffY, scale: diffScale }}
@@ -121,39 +120,37 @@ export function SectionReport() {
               className="relative mx-auto w-full max-w-[520px] rounded-2xl border border-main-black/10 bg-main-black p-8 text-main-ivory shadow-[0_30px_60px_-20px_rgba(11,11,10,0.35)] sm:p-10"
               style={{ scale: cardScale, y: cardY }}
             >
-              <p className="font-mono text-[13px] tracking-[0.2em] text-brand-orange uppercase">
-                Reconciliation Complete
+              <p className="text-[14px] font-semibold tracking-[0.04em] text-brand-orange">
+                변경 리포트
               </p>
               <p className="mt-3 font-mono text-[15px] text-secondary-text sm:text-[16px]">
-                user.name <span className="text-main-ivory">→</span>{' '}
-                user.displayName
+                GET /users/{'{id}'} · name{' '}
+                <span className="text-main-ivory">→</span> displayName
               </p>
 
-              <div className="mt-8 grid grid-cols-3 gap-4 border-t border-main-ivory/10 pt-6">
-                {stats.map((s) => (
-                  <div key={s.label}>
-                    <p className="text-[13px] text-secondary-text">{s.label}</p>
-                    <p className="mt-1 text-[26px] font-semibold tracking-tight">
-                      {s.value}
-                    </p>
+              <div className="mt-8 border-t border-main-ivory/10 pt-3">
+                {impacts.map((item) => (
+                  <div
+                    key={item.location}
+                    className="flex items-center justify-between gap-4 py-2.5 font-mono text-[13px] sm:text-[14px]"
+                  >
+                    <span className="truncate text-main-ivory">{item.location}</span>
+                    {item.confirmed ? (
+                      <span className="inline-flex shrink-0 items-center gap-2 font-sans font-medium text-main-ivory">
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-orange" />
+                        수정 필요
+                      </span>
+                    ) : (
+                      <span className="shrink-0 font-sans font-medium text-secondary-text/60">
+                        확인 필요
+                      </span>
+                    )}
                   </div>
                 ))}
               </div>
 
-              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-main-ivory/10 pt-6">
-                {checks.map((c) => (
-                  <span
-                    key={c}
-                    className="inline-flex items-center gap-2 font-mono text-[13px] text-main-ivory"
-                  >
-                    {c}
-                    <span className="text-brand-orange">✓</span>
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-8 border-t border-main-ivory/10 pt-6 text-center font-mono text-[13px] tracking-[0.15em] text-secondary-text uppercase">
-                No Action Required
+              <div className="mt-5 border-t border-main-ivory/10 pt-6 text-center text-[14px] text-secondary-text">
+                확정 3곳 · 미확정 1곳 · 근거와 함께
               </div>
             </motion.div>
           </div>

@@ -6,7 +6,7 @@ IMPORTE is a pre-launch developer tool for teams whose services call each other'
 
 ## Product sections
 - Connection (https://www.importe.dev/#connection): how the providing side (Router/Schema/Logic) and the calling side (Type/Client/Consumer) describe the same contract, and why IMPORTE connects them at a single point.
-- Trust (https://www.importe.dev/#trust): why IMPORTE only acts on what it can confirm, and deliberately leaves unresolved cases untouched instead of guessing.
+- Trust (https://www.importe.dev/#trust): why IMPORTE only confirms what it can prove, and marks everything else as unresolved instead of guessing.
 - Report (https://www.importe.dev/#report): the report IMPORTE produces after a change — what changed, which call sites are affected, and which are confirmed versus still need checking.
 - Positioning (https://www.importe.dev/#positioning): why IMPORTE exists — so developers can focus on experience and logic instead of repetitive wiring work.
 

@@ -153,8 +153,8 @@ function ConnectionDiagram() {
   return (
     <div ref={scrollRef} className="relative w-full">
       <div className="mb-8 flex justify-between px-1 font-mono text-xs tracking-[0.2em] text-main-black/65 uppercase sm:text-sm">
-        <span>Backend</span>
-        <span>Frontend</span>
+        <span>Provider</span>
+        <span>Consumer</span>
       </div>
 
       <div ref={containerRef} className="relative flex flex-col gap-10 sm:gap-14">
@@ -217,7 +217,7 @@ function ConnectionDiagram() {
 
 const paragraphs: { text: string; emphasis?: boolean }[] = [
   { text: '연결은 끝났습니다.', emphasis: true },
-  { text: 'Backend와 Frontend의 연결은\n항상 비슷합니다.' },
+  { text: 'API를 주는 쪽과 쓰는 쪽의 연결은\n항상 비슷합니다.' },
   { text: '같은 구조.\n같은 Router.\n같은 Schema.\n같은 Type.\n같은 Client.' },
   { text: '이미 정해진 의미를\n다른 코드로 다시 옮기는 일.' },
 ]
@@ -257,7 +257,7 @@ export function SectionDefinition() {
           >
             그런데 왜 매번
             <br />
-            사람이 다시 짜야 하나요?
+            사람이 다시 찾아야 하나요?
           </motion.p>
 
           <motion.p
