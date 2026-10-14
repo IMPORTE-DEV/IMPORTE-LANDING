@@ -7,7 +7,7 @@ type Theme = 'dark' | 'light'
 
 const navItems = [
   { label: '연결', id: 'connection' },
-  { label: '신뢰', id: 'trust' },
+  { label: '추출', id: 'extract' },
   { label: '리포트', id: 'report' },
   { label: '철학', id: 'positioning' },
 ]

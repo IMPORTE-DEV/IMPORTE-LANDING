@@ -4,7 +4,7 @@ import { Header } from './components/Header'
 import { DefinitionHero } from './components/DefinitionHero'
 import { Hero } from './components/Hero'
 import { SectionDefinition } from './components/SectionDefinition'
-import { SectionTrust } from './components/SectionTrust'
+import { SectionExtract } from './components/SectionExtract'
 import { SectionReport } from './components/SectionReport'
 import { SectionPositioning } from './components/SectionPositioning'
 import { Closing } from './components/Closing'
@@ -41,7 +41,7 @@ function App() {
         <DefinitionHero />
         <Hero />
         <SectionDefinition />
-        <SectionTrust />
+        <SectionExtract />
         <SectionReport />
         <SectionPositioning />
         <Closing />
