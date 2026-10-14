@@ -12,6 +12,12 @@
     />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://www.importe.dev/" />
+    <link
+      rel="alternate"
+      type="text/plain"
+      href="/llms.txt"
+      title="IMPORTE product summary for LLMs"
+    />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="IMPORTE" />
@@ -58,6 +64,26 @@
       }
     </script>
 
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "IMPORTE",
+        "url": "https://www.importe.dev/",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web",
+        "inLanguage": "ko",
+        "description": "API를 쓰는 프론트엔드 코드에서 소비자 계약(프론트 전용 Swagger)을 추출하고, API를 주는 쪽이 바뀌면 두 계약을 비교해 깨지는 곳을 찾아내는 개발자 도구.",
+        "featureList": [
+          "프론트엔드 코드에서 API 요구 계약을 OpenAPI(Swagger) 문서로 추출",
+          "필드마다 실제로 쓰는 파일과 줄을 함께 표시",
+          "제공하는 쪽 계약과 비교해 사라지거나 바뀐 필드를 표시",
+          "확정하지 못한 것은 추측하지 않고 미확정으로 표시"
+        ],
+        "publisher": { "@type": "Organization", "name": "IMPORTE" }
+      }
+    </script>
+
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
       (function (c, l, a, r, i, t, y) {
@@ -90,6 +116,20 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <h1>IMPORTE — 프론트 전용 Swagger 추출</h1>
+      <p>
+        API 문서는 서버가 무엇을 주는지 말합니다. IMPORTE는 코드가 무엇을
+        요구하는지 말합니다. API를 쓰는 프론트엔드 코드에서 엔드포인트와 필드,
+        그 필드를 실제로 쓰는 위치까지 문서로 뽑고, API를 주는 쪽이 바뀌면 두
+        계약을 비교해 깨지는 곳을 보여 줍니다. 확정하지 못한 것은 추측하지 않고
+        미확정으로 남깁니다.
+      </p>
+      <p>
+        <a href="https://app.importe.dev">GitHub로 시작하기</a> ·
+        <a href="/llms.txt">제품 요약(llms.txt)</a>
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import differenceShot from '../assets/product/report-difference.png'
+import differenceShotMobile from '../assets/product/report-difference-mobile.png'
 
 const diffLines = [
   { text: '  // users.dto.ts', sign: ' ' },
@@ -110,14 +111,22 @@ export function SectionReport() {
               className="relative mx-auto w-full max-w-[640px] pt-40 sm:pt-44"
               style={{ scale: cardScale, y: cardY }}
             >
-              <img
-                src={differenceShot}
-                width={818}
-                height={216}
-                loading="lazy"
-                alt="GET /users/{id}의 차이 카드. 쓰는 쪽 IMPORTE-FE와 주는 쪽 IMPORTE-BE를 맞대고, response.name이 제공 계약에 없다고 차이 있음으로 표시한다."
-                className="h-auto w-full rounded-xl border border-main-black/10 shadow-[0_30px_60px_-20px_rgba(11,11,10,0.35)]"
-              />
+              <picture>
+                <source
+                  media="(max-width: 639px)"
+                  srcSet={differenceShotMobile}
+                  width={396}
+                  height={318}
+                />
+                <img
+                  src={differenceShot}
+                  width={818}
+                  height={216}
+                  loading="lazy"
+                  alt="GET /users/{id}의 차이 카드. 쓰는 쪽 IMPORTE-FE와 주는 쪽 IMPORTE-BE를 맞대고, response.name이 제공 계약에 없다고 차이 있음으로 표시한다."
+                  className="h-auto w-full rounded-xl border border-main-black/10 shadow-[0_30px_60px_-20px_rgba(11,11,10,0.35)]"
+                />
+              </picture>
               <figcaption className="mt-3 text-[13px] text-main-black/50">
                 실제 제품 화면 · 예시 저장소
               </figcaption>
