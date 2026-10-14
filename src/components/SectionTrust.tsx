@@ -39,11 +39,11 @@ function ResolutionRow({
             viewport={{ once: true, amount: 0.6 }}
             transition={{ duration: 0.3, delay: index * 0.1 + 0.25 }}
           />
-          CONFIRMED
+          확정
         </span>
       ) : (
         <span className="text-[13px] font-medium tracking-wide text-secondary-text/60">
-          UNRESOLVED
+          미확정 · 확인 필요
         </span>
       )}
     </motion.div>
@@ -109,9 +109,9 @@ export function SectionTrust() {
             viewport={{ once: true, amount: 0.6 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            확실한 것은 처리하고,
+            확실한 것만 확정하고,
             <br />
-            어설프게 고치지 않습니다.
+            애매한 것은 추측하지 않습니다.
             <br />
             멈추고, 확인합니다.
           </motion.p>
@@ -139,8 +139,8 @@ export function SectionTrust() {
           >
             <div className="mb-2 flex items-center gap-2.5">
               <OMark size={16} ignited />
-              <span className="font-mono text-xs tracking-[0.2em] text-secondary-text uppercase">
-                Consumer Resolution
+              <span className="text-[13px] font-medium tracking-[0.04em] text-secondary-text">
+                소비 위치 확인
               </span>
             </div>
             <div>

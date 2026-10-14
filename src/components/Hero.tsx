@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-const chain = ['Backend Changed', 'Schema', 'Type', 'Client', 'Consumer']
+const chain = ['API Changed', 'Schema', 'Type', 'Client', 'Consumer']
 
 export function Hero() {
   return (
