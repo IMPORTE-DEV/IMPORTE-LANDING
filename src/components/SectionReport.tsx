@@ -1,5 +1,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import differenceShot from '../assets/product/report-difference.png'
+import differenceShotMobile from '../assets/product/report-difference-mobile.png'
 
 const diffLines = [
   { text: '  // users.dto.ts', sign: ' ' },
@@ -12,13 +14,6 @@ const diffLines = [
   { text: '  // users.controller.ts', sign: ' ' },
   { text: '  @Get(\':id\') getUser(@Param(\'id\') id: string)', sign: ' ' },
   { text: '    return this.users.toResponse(user)', sign: ' ' },
-]
-
-const impacts: { location: string; confirmed: boolean }[] = [
-  { location: 'ProfileHeader.tsx:27', confirmed: true },
-  { location: 'UserCard.tsx:14', confirmed: true },
-  { location: 'SettingsProfile.tsx:42', confirmed: true },
-  { location: 'LegacyView.tsx', confirmed: false },
 ]
 
 const copy: { text: string; className: string }[] = [
@@ -86,11 +81,7 @@ export function SectionReport() {
           >
             무엇이 바뀌었는지.
             <br />
-            어디까지 영향을 받았는지.
-            <br />
-            무엇이 확실하고,
-            <br />
-            무엇을 확인해야 하는지.
+            그래서 어디가 깨졌는지.
           </motion.p>
 
           <motion.p
@@ -116,43 +107,30 @@ export function SectionReport() {
               ))}
             </motion.pre>
 
-            <motion.div
-              className="relative mx-auto w-full max-w-[520px] rounded-2xl border border-main-black/10 bg-main-black p-8 text-main-ivory shadow-[0_30px_60px_-20px_rgba(11,11,10,0.35)] sm:p-10"
+            <motion.figure
+              className="relative mx-auto w-full max-w-[640px] pt-40 sm:pt-44"
               style={{ scale: cardScale, y: cardY }}
             >
-              <p className="text-[14px] font-semibold tracking-[0.04em] text-brand-orange">
-                변경 리포트
-              </p>
-              <p className="mt-3 font-mono text-[15px] text-secondary-text sm:text-[16px]">
-                GET /users/{'{id}'} · name{' '}
-                <span className="text-main-ivory">→</span> displayName
-              </p>
-
-              <div className="mt-8 border-t border-main-ivory/10 pt-3">
-                {impacts.map((item) => (
-                  <div
-                    key={item.location}
-                    className="flex items-center justify-between gap-4 py-2.5 font-mono text-[13px] sm:text-[14px]"
-                  >
-                    <span className="truncate text-main-ivory">{item.location}</span>
-                    {item.confirmed ? (
-                      <span className="inline-flex shrink-0 items-center gap-2 font-sans font-medium text-main-ivory">
-                        <span className="h-1.5 w-1.5 rounded-full bg-brand-orange" />
-                        수정 필요
-                      </span>
-                    ) : (
-                      <span className="shrink-0 font-sans font-medium text-secondary-text/60">
-                        확인 필요
-                      </span>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-5 border-t border-main-ivory/10 pt-6 text-center text-[14px] text-secondary-text">
-                확정 3곳 · 미확정 1곳 · 근거와 함께
-              </div>
-            </motion.div>
+              <picture>
+                <source
+                  media="(max-width: 639px)"
+                  srcSet={differenceShotMobile}
+                  width={396}
+                  height={318}
+                />
+                <img
+                  src={differenceShot}
+                  width={818}
+                  height={216}
+                  loading="lazy"
+                  alt="GET /users/{id}의 차이 카드. 쓰는 쪽 IMPORTE-FE와 주는 쪽 IMPORTE-BE를 맞대고, response.name이 제공 계약에 없다고 차이 있음으로 표시한다."
+                  className="h-auto w-full rounded-xl border border-main-black/10 shadow-[0_30px_60px_-20px_rgba(11,11,10,0.35)]"
+                />
+              </picture>
+              <figcaption className="mt-3 text-[13px] text-main-black/50">
+                실제 제품 화면 · 예시 저장소
+              </figcaption>
+            </motion.figure>
           </div>
         </div>
       </div>
