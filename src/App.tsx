@@ -3,8 +3,8 @@ import { Intro } from './components/Intro'
 import { Header } from './components/Header'
 import { DefinitionHero } from './components/DefinitionHero'
 import { Hero } from './components/Hero'
-import { SectionDefinition } from './components/SectionDefinition'
 import { SectionExtract } from './components/SectionExtract'
+import { SectionVsPact } from './components/SectionVsPact'
 import { SectionReport } from './components/SectionReport'
 import { SectionPositioning } from './components/SectionPositioning'
 import { Closing } from './components/Closing'
@@ -40,8 +40,8 @@ function App() {
       <main>
         <DefinitionHero />
         <Hero />
-        <SectionDefinition />
         <SectionExtract />
+        <SectionVsPact />
         <SectionReport />
         <SectionPositioning />
         <Closing />
