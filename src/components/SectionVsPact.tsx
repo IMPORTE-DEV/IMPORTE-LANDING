@@ -109,7 +109,7 @@ function Row({
   const cols =
     type === undefined
       ? 'sm:grid-cols-[1.4fr_1fr]'
-      : 'sm:grid-cols-[1.3fr_0.7fr_1.6fr]'
+      : 'sm:grid-cols-[1.2fr_0.55fr_1.85fr]'
   return (
     <div
       className={`grid grid-cols-1 gap-x-4 gap-y-0.5 border-t border-main-ivory/6 py-2 text-[13px] first:border-t-0 ${cols} ${dim ? 'opacity-55' : ''}`}
@@ -142,11 +142,11 @@ function Location({
 }) {
   return (
     <>
-      <span className="font-mono text-[12px]">
-        {file}:{line}
+      {/* 긴 경로가 줄바꿈되면 이 카드만 길어진다 — 파일 이름:줄만, 전체 경로는 title */}
+      <span className="font-mono text-[12px]" title={`${file}:${line}`}>
+        {file.split('/').pop()}:{line}
       </span>
-      <br />
-      <span className="text-[12px] text-secondary-text/80">{symbol}</span>
+      <span className="text-[12px] text-secondary-text/80"> · {symbol}</span>
     </>
   )
 }
@@ -295,7 +295,7 @@ export function SectionVsPact() {
     <section
       id="vs-pact"
       data-header-theme="dark"
-      className="scroll-mt-20 bg-secondary-black px-6 py-28 text-main-ivory sm:px-10 lg:px-24"
+      className="scroll-mt-20 bg-main-black px-6 py-28 text-main-ivory sm:px-10 lg:px-24"
     >
       <div className="mx-auto max-w-[1320px]">
         <div className="max-w-[760px]">
