@@ -231,7 +231,10 @@ function ImporteSide({ c }: { c: Contract }) {
 }
 
 function PactSide({ c }: { c: Contract }) {
-  const used = new Set<string>(c.response.map((f) => f.path))
+  // 하위 필드를 읽으면 그 자리도 쓴 것이다 — 빈 목록 상호작용의 `data[*]` 는 화면이 `data[*].name` 을 읽는다
+  const read = c.response.map((f) => f.path as string)
+  const isRead = (p: string) =>
+    read.some((r) => r === p || r.startsWith(p + '.') || r.startsWith(p + '['))
   return (
     <div className="space-y-4">
       <div>
@@ -258,7 +261,7 @@ function PactSide({ c }: { c: Contract }) {
           ))}
           {i.response.length ? (
             i.response.map(([p, example]) => {
-              const unused = !used.has(p)
+              const unused = !isRead(p)
               return (
                 <Row
                   key={p}
