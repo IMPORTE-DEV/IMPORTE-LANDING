@@ -6,7 +6,7 @@ const copy: { text: string; className: string }[] = [
   {
     text: '프론트 전용 Swagger 추출',
     className:
-      'text-[14px] font-semibold tracking-[0.04em] text-brand-orange sm:text-[15px]',
+      'text-[14px] font-semibold tracking-[0.04em] text-[#ab421a] sm:text-[15px]',
   },
   {
     text: 'API를 쓰는 코드에서,\n바로 문서로.',
